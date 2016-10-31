@@ -1,0 +1,20 @@
+{
+  "name": "graphsql-tryout",
+  "version": "1.0.0",
+  "description": "Learning & trying about graphql",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "react",
+    "relay",
+    "graphql",
+    "facebook"
+  ],
+  "author": "Tsung Hung",
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^0.7.2"
+  }
+}
