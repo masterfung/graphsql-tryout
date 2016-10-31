@@ -4,3 +4,4 @@
 /coverage
 /src/config/global.json
 /src/api/cachedData/cache.js
+.DS_Store
