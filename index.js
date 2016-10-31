@@ -9,9 +9,9 @@ const rli = readline.createInterface({
 });
 
 rli.question('Client Request: ', inputQuery => {
-	graphql(mySchema, inputQuery).then(result => {
+	graphql(mySchema, inputQuery).then(res => {
 
-		console.log('Server Answer: ', result);
+		console.log('Server Answer: ', res.data);
 	});
 
 	rli.close();
