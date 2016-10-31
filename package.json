@@ -1,10 +1,14 @@
 {
   "name": "graphsql-tryout",
   "version": "1.0.0",
-  "description": "Learning & trying about graphql",
+  "description": "Learning & trying about Graphql",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masterfung/graphsql-tryout.git"
   },
   "keywords": [
     "react",
