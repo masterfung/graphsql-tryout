@@ -19,8 +19,6 @@ MongoClient.connect(MONGO_URL, (err, db) => {
 		graphql(mySchema, inputQuery, {}, { db }).then(res => {
 
 			console.log('Server Answer: ', res.data);
-			db.collection('users').count()
-     		  .then(usersCount => console.log(usersCount));
 
 			db.close(() => rli.close());
 		});

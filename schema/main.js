@@ -16,7 +16,7 @@ const queryType = new GraphQLObjectType({
             resolve: () => 'world'
         },
         diceRoll: {
-            type: new GraphQLList(GraphQLInt), // defining the type
+            type: new GraphQLList(GraphQLInt),
             args: {
                 count: {
                     type: GraphQLInt,
@@ -24,18 +24,17 @@ const queryType = new GraphQLObjectType({
                 }
             },
             resolve: (_, args) => {
-                    let rolls = [];
-                    for (let i = 0; i < args.count; i++) {
-                        rolls.push(roll());
-                    }
-                    return rolls;
-                } // two random numbers
+                let rolls = [];
+                for (let i = 0; i < args.count; i++) {
+                    rolls.push(roll());
+                }
+                return rolls;
+            }
         },
         usersCount: {
             type: GraphQLInt,
-            resolve: (_, args, { db }) => {
+            resolve: (_, args, { db }) =>
                 db.collection('users').count()
-            }
         }
     }
 });
