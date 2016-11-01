@@ -1,4 +1,3 @@
-const { graphql } = require('graphql');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const graphqlHTTP = require('express-graphql');
@@ -13,9 +12,10 @@ MongoClient.connect(MONGO_URL, (err, db) => {
 	assert.equal(null, err);
 	console.log('You are connected to MongoDB server');
 
-	app.use('graphql', graphqlHTTP({
+	app.use('/graphql', graphqlHTTP({
 		schema: mySchema,
-		context: { db }
+		context: { db },
+		graphiql: true
 	}));
 
 	app.listen(3000, () =>
