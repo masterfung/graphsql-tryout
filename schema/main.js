@@ -7,6 +7,7 @@ const {
     GraphQLBoolean,
     GraphQLList
 } = require('graphql');
+const fs = require('fs');
 
 const roll = () => Math.floor(6 * Math.random()) + 1;
 
@@ -15,11 +16,30 @@ const exEmployee = {
     lastName: 'mitch'
 };
 
-// Custom functions
+// Title casing function for the name usages
 const toTitleCase = str => {
     return str.replace(/\w\S*/g, txt => 
         txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 };
+
+const appendLinePromise = (path, line) => {
+    return new Promise((resolve, reject) => {
+        fs.appendFile(path, line, err => {
+            if (err) {throw reject(err)};
+            resolve(line + '\n');
+        });
+    });
+};
+
+const readLastLinePromise = path => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, (err, data) => {
+            if (err) {throw reject(err)};
+            resolve(data.toString().trim().split('\n').slice(-1)[0]);
+        });
+    });
+};
+
 
 const EmployeeType = new GraphQLObjectType({
     name: 'Employee',
@@ -99,13 +119,34 @@ const queryType = new GraphQLObjectType({
             },
             exEmployee: {
                 type: EmployeeType,
+                description: 'Displays a static name back',
                 resolve: () => exEmployee
+            },
+            lastQuote: {
+                type: GraphQLString,
+                description: 'Pulls from the quotes.txt file from data and displays the last line',
+                resolve: () => readLastLinePromise('data/quotes.txt')
             }
         })
 });
 
+const mutationType = new GraphQLObjectType({
+    name: 'RootMutation',
+    fields: {
+        addQuote: {
+            type: GraphQLString,
+            description: 'Add string text that gets appended to quotes.txt file',
+            args: {
+                body: { type: GraphQLString }
+            },
+            resolve: (_, args) => appendLinePromise('data/quotes.txt', args.body)
+        }
+    }
+});
+
 const mySchema = new GraphQLSchema({
-    query: queryType
+    query: queryType,
+    mutation: mutationType
 });
 
 module.exports = mySchema;
