@@ -21,13 +21,13 @@ const EmployeeType = new GraphQLObjectType({
             type: GraphQLString,
             args: {
                 upperCase: { type: GraphQLBoolean },
-                resolve: (obj, args) => {
+            },
+            resolve: (obj, args) => {
                     let fullName = `${obj.firstName} ${obj.lastName}`;
                     return args.upperCase ? fullName.toUpperCase() : fullName;
-                }
-            },
-            boss: { type: EmployeeType }
-        }
+            }
+        },
+        boss: { type: EmployeeType }
     })
 });
 
