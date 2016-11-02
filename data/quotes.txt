@@ -1,2 +1,4 @@
 When we create APIs, we usually create them to work with some form of data, and when we work with data in Node.js, we do so asynchronously. 
 We initiate a command to read or write data, and then we handle the response with a callback or a promise.
+Try to be a rainbow in someone's cloud.
+Please start anew today.
